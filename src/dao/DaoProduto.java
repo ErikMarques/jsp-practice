@@ -82,7 +82,7 @@ public class DaoProduto {
 
 		try {
 
-			String sql = "delete from usuario where id = '" + id + "'";
+			String sql = "delete from produto where id = '" + id + "'";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.execute();
 			connection.commit();
@@ -100,7 +100,10 @@ public class DaoProduto {
 	// Lançando a exceção para cima pois é apenas uma consulta
 	public BeanCadastroProdutos consultar(String id) throws Exception {
 
-		String sql = "select * from usuario where id = '" + id + "'";
+		String sql = "select * from produto where id = '" + id + "'";
+
+		System.out.println("Realizando a consulta no banco de dados...");
+		System.out.println("DADOS CARREGADOS NA TABELA!");
 
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		// Fazendo o Prepared Statement para preparar a conexão.
@@ -121,10 +124,10 @@ public class DaoProduto {
 		return null;
 	}
 
-	public boolean validarLogin(String login) throws Exception { // Lançando a exceção para cima pois é apenas uma
+	public boolean validarProduto(String nomeProduto) throws Exception { // Lançando a exceção para cima pois é apenas uma
 		// consulta
 
-		String sql = "select count(1) as qtd from usuario where login= '" + login + "'";
+		String sql = "select count(1) as qtd from produto where nome= '" + nomeProduto + "'";
 		// Count() retorna 1 se existir o login no banco e 0 se não existir.
 
 		PreparedStatement preparedStatement = connection.prepareStatement(sql); // Fazendo o Prepared Statement para
