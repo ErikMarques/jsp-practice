@@ -109,36 +109,31 @@ public class Produto extends HttpServlet {
 			String msg_produto = null;
 			boolean podeInserir = true;
 
-			produto.setId(!id.isEmpty() ? Long.parseLong(id) : null); // produto.setId(Long.parseLong(id));
-
+			// VERIFICAÇÃO DOS CAMPOS SE ESTÃO PREENCHIDOS OU NULOS
 			if (nome == null || nome.isEmpty()) {
-				produto.setNome(nome);
-
-				if (quantidade != null || quantidade.isEmpty()) {
-					produto.setQuantidade(Double.parseDouble(quantidade));
-
-					if (valor != null || valor.isEmpty()) {
-						produto.setValor(Double.parseDouble(valor));
-					} else {
-						msg = "Valor deve ser informado";
-						podeInserir = false;
-						request.setAttribute("product", produto);
-					}
-				} else {
-					msg = "Quantidade deve ser informado";
-					podeInserir = false;
-					request.setAttribute("product", produto);
-				}
-
-			} else {
-				msg = "Nome deve ser informado";
+				msg = "O nome deve ser informado";
 				podeInserir = false;
 				request.setAttribute("product", produto);
+
+			} else if (quantidade == null || quantidade.isEmpty()) {
+				msg = "A quantidade deve ser informada";
+				podeInserir = false;
+				request.setAttribute("product", produto);
+
+			} else if (valor == null || valor.isEmpty()) {
+				msg = "O valor deve ser informado";
+				podeInserir = false;
+				request.setAttribute("product", produto);
+
 			}
 
-			try
+			produto.setId(!id.isEmpty() ? Long.parseLong(id) : null); // produto.setId(Long.parseLong(id));
 
-			{
+			produto.setNome(nome);
+			produto.setQuantidade(Double.parseDouble(quantidade));
+			produto.setValor(Double.parseDouble(valor));
+
+			try {
 
 				// CADASTR0 - VERIFICAÇÃO SE JÁ EXISTE UM PRODUTO CADASTRADO COM A MESMA
 				// INFORMAÇÃO
