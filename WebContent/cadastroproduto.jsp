@@ -62,7 +62,7 @@
 				<td>
 					<!--Criando uma célula na linha para o registro --> <c:out value="${product.quantidade }"></c:out> <!--  Tag c:out imprime na tela o valor passado na expression language -->
 				<td>
-					<!-- Criando uma célula na linha para o registro --> <c:out value="${product.valor}"></c:out> <!-- Tag c:out imprime na tela o valor passado na expression language -->
+					<!-- Criando uma célula na linha para o registro --> R$ <c:out value="${product.valor}"></c:out> <!-- Tag c:out imprime na tela o valor passado na expression language -->
 				</td>
 
 				<td><a href="salvarProduto?acao=editar&product=${product.id }"><img src="resources/img/btn_edit.png" title="Editar dados" alt="Editar" width="20px" height="20px"></a></td>

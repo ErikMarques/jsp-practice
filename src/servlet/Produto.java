@@ -105,39 +105,45 @@ public class Produto extends HttpServlet {
 
 			BeanCadastroProdutos produto = new BeanCadastroProdutos();
 
-			produto.setNome(nome);
-			produto.setQuantidade(Double.parseDouble(quantidade));
+			String msg = null;
+			String msg_produto = null;
+			boolean podeInserir = true;
+
 			produto.setId(!id.isEmpty() ? Long.parseLong(id) : null); // produto.setId(Long.parseLong(id));
-			produto.setValor(Double.parseDouble(valor));
 
-			try {
+			if (nome == null || nome.isEmpty()) {
+				produto.setNome(nome);
 
-				String msg = null;
-				String msg_produto = null;
-				boolean podeInserir = true;
+				if (quantidade != null || quantidade.isEmpty()) {
+					produto.setQuantidade(Double.parseDouble(quantidade));
 
-				// VERIFICAÇÃO DOS CAMPOS SE ESTÃO PREENCHIDOS OU NULOS
-				if (nome == null || nome.isEmpty()) {
-					msg = "Nome deve ser informado";
-					podeInserir = false;
-					request.setAttribute("product", produto);
-
-				} else if (quantidade == null || quantidade.isEmpty()) {
+					if (valor != null || valor.isEmpty()) {
+						produto.setValor(Double.parseDouble(valor));
+					} else {
+						msg = "Valor deve ser informado";
+						podeInserir = false;
+						request.setAttribute("product", produto);
+					}
+				} else {
 					msg = "Quantidade deve ser informado";
 					podeInserir = false;
 					request.setAttribute("product", produto);
-
-				} else if (valor == null || valor.isEmpty()) {
-					msg = "Valor deve ser informado";
-					podeInserir = false;
-					request.setAttribute("product", produto);
-
 				}
+
+			} else {
+				msg = "Nome deve ser informado";
+				podeInserir = false;
+				request.setAttribute("product", produto);
+			}
+
+			try
+
+			{
 
 				// CADASTR0 - VERIFICAÇÃO SE JÁ EXISTE UM PRODUTO CADASTRADO COM A MESMA
 				// INFORMAÇÃO
 
-				if (id == null || id.isEmpty()) {
+				if (id == null || id.isEmpty() && podeInserir) {
 					if (daoProduto.validarProduto(nome) && podeInserir) {
 
 						daoProduto.salvar(produto);
@@ -155,7 +161,7 @@ public class Produto extends HttpServlet {
 				// ATUALIZAÇÃO - VERIFICAÇÃO SE JÁ EXISTE UM LOGIN CADASTRADO COM A MESMA
 				// INFORMAÇÃO
 
-				else if (id != null && !id.isEmpty()) { // Verificando se é uma atualização de cadastro
+				else if (id != null && !id.isEmpty() && podeInserir) { // Verificando se é uma atualização de cadastro
 
 					long testeId = Long.parseLong(request.getParameter("id"));
 
