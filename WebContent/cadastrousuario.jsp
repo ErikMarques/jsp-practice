@@ -10,9 +10,14 @@
 
 <meta charset="ISO-8859-1">
 
+<!-- Adicionando JQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
 <title>Cadastro usuario JSP</title>
 </head>
 <body>
+	<a href="acessoliberado.jsp"> Inicío</a>
+	<a href="index.jsp">Sair</a>
 
 	<!-- Criando um formulario com os campos para cadastrar um novo usuário no banco de dados -->
 
@@ -20,7 +25,8 @@
 	<!-- A ação é salvarUsuario -->
 	<!-- O post envia os dados -->
 
-	<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false;"><!-- IF ternário em java e java script -->
+	<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false;">
+		<!-- IF ternário em java e java script -->
 		<ul class="form-style-1">
 
 			<h1>Cadastro de usuário</h1>
@@ -63,6 +69,36 @@
 				<tr>
 					<td><label>Telefone <span class="required">*</span></label></td>
 					<td><input type="text" id="telefone" name="telefone" value="${user.telefone}" class="field-long"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><label>Cep: <span class="required">*</span></label></td>
+					<td><input type="text" id="cep" name="cep" value="${user.cep}" onblur="consultaCep();"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><label>Rua: <span class="required">*</span></label></td>
+					<td><input type="text" id="rua" name="rua" value="${user.rua}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><label>Bairro: <span class="required">*</span></label></td>
+					<td><input type="text" id="bairro" name="bairro" value="${user.bairro}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><label>Cidade: <span class="required">*</span></label></td>
+					<td><input type="text" id="cidade" name="cidade" value="${user.cidade}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><label>Estado: <span class="required">*</span></label></td>
+					<td><input type="text" id="estado" name="estado" value="${user.estado}"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><label>Ibge: <span class="required">*</span></label></td>
+					<td><input type="text" id="ibge" name="ibge" value="${user.ibge}"></td>
 					<td></td>
 				</tr>
 
@@ -143,11 +179,40 @@
 				alert('Informe o Telefone!');
 				return false;
 			}
-		return true;
+			return true;
+		}
+
+		function consultaCep() {
+			var cep = $("#cep").val();
+
+			//Consulta o webservice viacep.com.br/
+			$.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?",
+					function(dados) {
+
+						if (!("erro" in dados)) {
+							//Atualiza os campos com os valores da consulta.
+							$("#rua").val(dados.logradouro);
+							$("#bairro").val(dados.bairro);
+							$("#cidade").val(dados.localidade);
+							$("#estado").val(dados.uf);
+							$("#ibge").val(dados.ibge);
+						} //end if.
+						else {
+							//CEP pesquisado não foi encontrado.
+							$("#cep").val('');
+							$("#rua").val('');
+							$("#bairro").val('');
+							$("#cidade").val('');
+							$("#estado").val('');
+							$("#ibge").val('');
+							alert("CEP não encontrado.");
+						}
+					});
+
 		}
 	</script>
-	
-	
-	
+
+
+
 </body>
 </html>

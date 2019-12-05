@@ -8,7 +8,8 @@
 <title>Cadastro Produto JSP</title>
 </head>
 <body>
-
+<a href="acessoliberado.jsp"> Inicío</a>
+<a href="index.jsp">Sair</a>
 	<table>
 		<h1>Cadastro de Produtos</h1>
 		<h4 style="color: blue;">${msg}</h4>

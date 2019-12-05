@@ -93,7 +93,15 @@ public class Usuario extends HttpServlet {
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
 			String telefone = request.getParameter("telefone");
+			
+			String cep = request.getParameter("cep");
+			String rua = request.getParameter("rua");
+			String bairro = request.getParameter("bairro");
+			String cidade = request.getParameter("cidade");
+			String estado = request.getParameter("estado");
+			String ibge = request.getParameter("ibge");
 
+			
 			// Criando um objeto BeanCursoJsp
 			BeanCursoJsp usuario = new BeanCursoJsp();
 			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : null); /// Lançando uma exceção nessa linha: Antes:
@@ -102,7 +110,14 @@ public class Usuario extends HttpServlet {
 			usuario.setLogin(login);
 			usuario.setSenha(senha);
 			usuario.setTelefone(telefone);
-
+			
+			usuario.setCep(cep);
+			usuario.setRua(rua);
+			usuario.setBairro(bairro);
+			usuario.setCidade(cidade);
+			usuario.setEstado(estado);
+			usuario.setIbge(ibge);
+			
 			try {
 
 				String msg = null;
