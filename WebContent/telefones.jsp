@@ -34,11 +34,21 @@
 
 					<tr>
 						<td><label>User:</label></td>
-						<td><input type="text" readonly="readonly" id="id" name="id" value="${userEscolhido}"></td>
+						<td><input type="text" readonly="readonly" id="id" name="id" value="${userEscolhido.id}"></td>
+						<td><input type="text" readonly="readonly" id="nome" name="nome" value="${userEscolhido.nome}"></td>
+					</tr>
+					<tr>
+						<td>Número:</td>
+						<td><input type="text" id="numero" name="numero"></td>
+						<td><select id="tipo" name="tipo">
+								<option>Casa</option>
+								<option>Contato</option>
+								<option>Celular</option>
+						</select></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td><input type="submit" value="Salvar"> <input type="submit" value="Cancelar" onClick="document.getElementById('formUser').action = 'salvarUsuario?acao=reset'"></td>
+						<td><input type="submit" value="Salvar">
 						<td></td>
 					</tr>
 
@@ -76,8 +86,11 @@
 	<script type="text/javascript">
 		function validarCampos() {
 
-			if (document.getElementById("login").value == '') {
-				alert('Informe o Login!');
+			if (document.getElementById("numero").value == '') {
+				alert('Informe o número!');
+				return false;
+			} else if (document.getElementById("tipo").value == '') {
+				alert('Informe o tipo');
 				return false;
 			}
 			return true;

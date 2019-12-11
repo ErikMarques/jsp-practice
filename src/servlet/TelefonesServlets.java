@@ -9,12 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.BeanCursoJsp;
+import dao.DaoUsuario;
+
 /**
  * Servlet implementation class TelefonesServlets
  */
 @WebServlet("/salvarTelefones")
 public class TelefonesServlets extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private DaoUsuario daoUsuario = new DaoUsuario();
 
 	public TelefonesServlets() {
 		super();
@@ -26,21 +31,35 @@ public class TelefonesServlets extends HttpServlet {
 
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		String user = request.getParameter("user");
-		request.getSession().setAttribute("user", user);
+		try {
+			String user = request.getParameter("user");
 
-		RequestDispatcher view = request.getRequestDispatcher("/telefones.jsp");
-		//request.setAttribute("telefones", daoUsuario.listar());
-		request.setAttribute("msg", "Salvo com sucesso!");
-		request.setAttribute("userEscolhido", user);
-		view.forward(request, response);
+			BeanCursoJsp usuario = daoUsuario.consultar(user);
 
+			request.getSession().setAttribute("userEscolhido", usuario);
+			request.setAttribute("userEscolhido", usuario);
+
+			RequestDispatcher view = request.getRequestDispatcher("/telefones.jsp");
+			// request.setAttribute("telefones", daoUsuario.listar());
+			request.setAttribute("msg", "Salvo com sucesso!");
+			view.forward(request, response);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		doGet(request, response);
+		
+		BeanCursoJsp beanCursoJsp = (BeanCursoJsp) request.getSession().getAttribute("userEscolhido");
+
+		String numero = request.getParameter("numero");
+		String tipo = request.getParameter("tipo");
+		
 	}
 
 }
