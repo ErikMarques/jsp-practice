@@ -13,6 +13,7 @@
 
 <body>
 	<a href="acessoliberado.jsp"> Inicío</a>
+	<a href="salvarUsuario?acao=listartodos">Voltar</a>
 	<a href="index.jsp">Sair</a>
 
 	<center>
@@ -77,7 +78,7 @@
 					<td><c:out value="${fone.id}"></c:out></td>
 					<td><c:out value="${fone.numero}"></c:out></td>
 					<td><c:out value="${fone.tipo}"></c:out>
-					<td><a href="salvarUsuario?acao=delete&user=${fone.id }"><img src="resources/img/btn_excluir.png" title="Excluir" alt="excluir" width="20px" height="20px"></a></td>
+					<td><a href="salvarTelefones?acao=deleteFone&foneId=${fone.id }"><img src="resources/img/btn_excluir.png" title="Excluir" alt="excluir" width="20px" height="20px"></a></td>
 				</tr>
 			</c:forEach>
 		</table>

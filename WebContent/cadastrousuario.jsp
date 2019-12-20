@@ -133,8 +133,8 @@
 
 					<td><a href="salvarUsuario?acao=editar&user=${user.id }"><img src="resources/img/btn_edit.png" title="Editar dados" alt="Editar" width="20px" height="20px"></a></td>
 					<td><a href="salvarUsuario?acao=delete&user=${user.id }"><img src="resources/img/btn_excluir.png" title="Excluir dados" alt="Excluir" width="20px" height="20px"></a></td>
-					<td><a href="salvarTelefones?user=${user.id }"><img src="resources/img/btn_telefone.png" title="Telefones" alt="Telefones" width="20px" height="20px"></a></td>
-					
+					<td><a href="salvarTelefones?acao=addFone&user=${user.id }"><img src="resources/img/btn_telefone.png" title="Telefones" alt="Telefones" width="20px" height="20px"></a></td>
+
 				</tr>
 			</c:forEach>
 		</table>
