@@ -24,7 +24,7 @@
 	<!-- A ação é salvarUsuario -->
 	<!-- O post envia os dados -->
 
-	<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false;">
+	<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos() ? true : false;" enctype="multipart/form-data">
 		<!-- IF ternário em java e java script -->
 		<ul class="form-style-1">
 			<li>
@@ -36,17 +36,17 @@
 
 					<tr>
 						<td><label>Código:</label></td>
-						<td><input type="text" readonly="readonly" id="id" name="id" value="${user.id}"></td>
+						<td><input type="text" readonly="readonly" id="id" name="id" value="${user.id}" placeholder="Gerado automáticamente"></td>
 
 						<td><label>Cep:</label></td>
-						<td><input type="text" id="cep" name="cep" value="${user.cep}" onblur="consultaCep();"></td>
+						<td><input type="text" id="cep" name="cep" value="${user.cep}" placeholder="Informe um cep válido" onblur="consultaCep();"></td>
 					</tr>
 
 					<tr>
 						<!-- Cria uma célula dentro da linha com o texto nome -->
 						<td><label>Nome: </label></td>
 						<!-- Cria um campo para receber o valor que será o nome -->
-						<td><input type="text" id="nome" name="nome" value="${user.nome}"></td>
+						<td><input type="text" id="nome" name="nome" value="${user.nome}" placeholder="Informe o nome do usuário"></td>
 
 						<td><label>Rua:</label></td>
 						<td><input type="text" id="rua" name="rua" value="${user.rua}"></td>
@@ -81,6 +81,12 @@
 						<td><label>Ibge:</label></td>
 						<td><input type="text" id="ibge" name="ibge" value="${user.ibge}"></td>
 					</tr>
+					<tr>
+						<td><label>Foto:</label></td>
+						<td><input type="file" name="foto" value="foto"></td>
+					</tr>
+
+
 					<tr>
 						<td></td>
 						<td><input type="submit" value="Salvar"> <input type="submit" value="Cancelar" onClick="document.getElementById('formUser').action = 'salvarUsuario?acao=reset'"></td>

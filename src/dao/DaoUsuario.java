@@ -28,9 +28,9 @@ public class DaoUsuario {
 
 		try {
 
-			String sql = "insert into usuario(nome, login, senha, telefone, cep, rua, bairro, cidade, estado, ibge) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // Preparando
-																																							// a
-																																							// string
+			String sql = "insert into usuario(nome, login, senha, telefone, cep, rua, bairro, cidade, estado, ibge, fotobase64, contenttype) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // Preparando
+			// a
+			// string
 			// SQL - Os ?,?
 			// são
 			// parametros que serão recebidos na ordem
@@ -55,6 +55,8 @@ public class DaoUsuario {
 			insert.setString(8, usuario.getCidade());
 			insert.setString(9, usuario.getEstado());
 			insert.setString(10, usuario.getIbge());
+			insert.setString(11, usuario.getFotoBase64());
+			insert.setString(12, usuario.getContentType());
 
 			// Realizando o insert no banco de dados
 			insert.execute();
@@ -191,7 +193,7 @@ public class DaoUsuario {
 			preparedStatement.setString(8, usuario.getCidade());
 			preparedStatement.setString(9, usuario.getEstado());
 			preparedStatement.setString(10, usuario.getIbge());
-			
+
 			preparedStatement.executeUpdate();
 
 			connection.commit();
